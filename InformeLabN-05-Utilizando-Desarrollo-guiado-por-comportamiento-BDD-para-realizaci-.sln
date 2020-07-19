@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30225.117
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InformeLabN-05-Utilizando-Desarrollo-guiado-por-comportamiento-BDD-para-realizaci-", "InformeLabN-05-Utilizando-Desarrollo-guiado-por-comportamiento-BDD-para-realizaci-.csproj", "{16595AF3-C3FF-4297-9401-FAC0228CAB88}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16595AF3-C3FF-4297-9401-FAC0228CAB88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16595AF3-C3FF-4297-9401-FAC0228CAB88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16595AF3-C3FF-4297-9401-FAC0228CAB88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16595AF3-C3FF-4297-9401-FAC0228CAB88}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4F1908B8-022F-46CA-8EF6-2517377316C6}
+	EndGlobalSection
+EndGlobal

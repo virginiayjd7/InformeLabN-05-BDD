@@ -1,0 +1,2 @@
+C:\Users\Virginia Aquino\Documents\GitHub\InformeLabN-05-Utilizando-Desarrollo-guiado-por-comportamiento-BDD-para-realizaci-\obj\Debug\netcoreapp2.1\InformeLabN-05-Utilizando-Desarrollo-guiado-por-comportamiento-BDD-para-realizaci-.AssemblyInfoInputs.cache
+C:\Users\Virginia Aquino\Documents\GitHub\InformeLabN-05-Utilizando-Desarrollo-guiado-por-comportamiento-BDD-para-realizaci-\obj\Debug\netcoreapp2.1\InformeLabN-05-Utilizando-Desarrollo-guiado-por-comportamiento-BDD-para-realizaci-.AssemblyInfo.cs
