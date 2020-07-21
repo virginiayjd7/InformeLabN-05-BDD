@@ -1,6 +1,6 @@
 using CoreBDD;
 
-namespace demobdd
+namespace Demobdd
 {
     [Feature("Calculator", 
     @"In order to avoid silly mistakes
@@ -13,7 +13,7 @@ namespace demobdd
             
          }
 
-         public CalculatorFeature()
+		 public CalculatorFeature() 
          {
             
          }

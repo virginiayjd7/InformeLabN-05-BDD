@@ -18,7 +18,7 @@ namespace InformeLabN_05_Utilizando_Desarrollo_guiado_por_comportamiento_BDD_par
             And("It sets the equation to 10 x 5", () => calculator.Equation.ShouldBe("10 x 5"));
         }
 
-        [ScenarioOutline("Divide two numbers")]
+        [Scenario("Divide two numbers")]
         public void DivideTwoNumbers()
         {
           Given("I have a calculator", () => calculator = new Calculator());
@@ -26,6 +26,7 @@ namespace InformeLabN_05_Utilizando_Desarrollo_guiado_por_comportamiento_BDD_par
           And("I key in 5 and press divide", () => calculator.Divide(5));
           Then("It sets the Total to 2", () => calculator.Total.ShouldBe(2));
         }
+        [ScenarioOutline("Divide two numbers")]
         [Examples(10, 2, 5)]
         [Examples(20, 4, 5)]
         public void DivideTwoNumbers(int number, int divideby, int result)

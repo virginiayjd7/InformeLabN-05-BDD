@@ -1,152 +1,119 @@
-\section{Parte 1: Creación de una prueba y generación del código} 
+\section{Parte 1:Procedimiento} 
 \begin{itemize}
- \item  Cree un proyecto de biblioteca de clases .NET Standard en C char. Este proyecto contendrá el código
-que quiere probar. Asigne al proyecto el nombre MyMath.
+ \item Se utilizará el framework CoreBDD. Instalar la plantilla de proyecto dotnet a través de
+ dotnet new -i corebdd.projecttemplate
 \begin{center}
 \includegraphics[width=\columnwidth]{images/1}\newline
 \end{center}
- \item  En la misma solución, agregue un nuevo proyecto de prueba de MSTest (.NET Core) . Asigne al
-proyecto de prueba el nombre MathTests.
- \item
+
+\item Luego cree una nueva carpeta para su proyecto de prueba y ejecute
+ dotnet new corebdd
+\item Alternativamente, puede agregar CoreBDD a un proyecto de prueba xUnit existente a través del paquete
+nuget
+ dotnet add package CoreBDD
 \begin{center}
 \includegraphics[width=\columnwidth]{images/2}\newline
-\includegraphics[width=\columnwidth]{images/001}\newline
-\end{center} 
- \item Escriba un método de prueba simple que compruebe el resultado obtenido para una entrada
-específica. Agregue el código siguiente a la clase UnitTest1:
+\end{center}
+\item También hay una herramienta de línea de comandos opcional para ejecutar pruebas con salida
+personalizada, clases de prueba de andamios (características / escenarios / pasos) y generación de código
+bidireccional (pruebas de Gherkin a CoreBDD y viceversa). Hay más documentación disponible sobre la CLI
+en la parte inferior de esta página.
+ dotnet tool install -g corebdd.commandline
+
 \begin{center}
 \includegraphics[width=\columnwidth]{images/3}\newline
-\end{center} 
-\item En el cuadro de diálogo Generar tipo, establezca Proyecto en MyMath, el proyecto de biblioteca
-de clases y, luego, elija Aceptar.
-\begin{center}
-\includegraphics[width=\columnwidth]{images/4}\newline
-\end{center} 
-\item Genere un método a partir del código de prueba. Coloque el cursor en SquareRoot y, luego, en el menú
-de bombilla, elija Generar método "Rooter.SquareRoot"
-\begin{center}
-\includegraphics[width=\columnwidth]{images/5}\newline
-\end{center} 
-\item Ejecute la prueba unitaria
-\begin{center}
-\includegraphics[width=\columnwidth]{images/6}\newline
-\end{center} 
+\end{center}
+
 \end{itemize}
-\section{Comprobación de un cambio en el código } 
+\section{Escribir pruebas de CoreBDD} 
+-----
 \begin{itemize}
-\item En el archivo Class1.cs, mejore el código de SquareRoot:
+ \item Siguiendo el ejemplo habitual de la calculadora, podemos comenzar con el siguiente modelo para probar
 \begin{center}
-\includegraphics[width=\columnwidth]{images/7}\newline
+\includegraphics[width=\columnwidth]{images/001}\newline
 \end{center}
-\item En el Explorador de pruebas, elija Ejecutar todo.
-\begin{center}
-\includegraphics[width=\columnwidth]{images/8}\newline
-\end{center}
-\end{itemize}
-
-\section{Extensión del intervalo de entradas} 
-
-\begin{itemize}
-
-\item En la clase de prueba, agregue la siguiente prueba para un intervalo de valores de entrada:
-\begin{center}
-\includegraphics[width=\columnwidth]{images/10}\newline
-\end{center}
-\item En el Explorador de pruebas, elija Ejecutar todo.
-\begin{center}
-\includegraphics[width=\columnwidth]{images/11}\newline
-\end{center}
-\item Inspeccione el método que se está probando para ver qué puede ser incorrecto. Modifique el
-código SquareRoot de la forma siguiente:
+\item Podemos definir una Característica para cotejar un conjunto de escenarios derivando de la clase
+base Especificación y decorando con el atributo Característica. Tenga en cuenta que ambos constructores
+son necesarios para admitir los diferentes estilos de sintaxis de prueba.
 \begin{center}
 \includegraphics[width=\columnwidth]{images/002}\newline
 \end{center}
-\item En el Explorador de pruebas, elija Ejecutar todo.
+\item Una vez que hemos creado nuestra Característica base, tenemos varios sabores diferentes para escribir
+pruebas, primero podemos generar un escenario por clase (similar a las pruebas de estilo Cucumber) con
+un método para cada paso de Dado / Cuándo / Entonces. Para hacer esto, simplemente herede de la
+nueva clase de entidad, decore con un atributo de ejemplo y proporcione los métodos Given, When, Then
+que se ejecutarán en orden
 \begin{center}
-\includegraphics[width=\columnwidth]{images/12}\newline
+\includegraphics[width=\columnwidth]{images/003}\newline
 \end{center}
-\end{itemize}
-\section{Agregue pruebas para casos excepcionales} 
-
-\begin{itemize}
-
-\item Agregue una nueva prueba para entradas negativas:
-\begin{center}
-\includegraphics[width=\columnwidth]{images/13}\newline
-\end{center}
-\item En el Explorador de pruebas, elija Ejecutar todo.
-\begin{center}
-\includegraphics[width=\columnwidth]{images/11}\newline
-\end{center}
-\item Corrija el código SquareRoot; para ello, agregue la siguiente instrucción if al principio del método:
-\begin{center}
-\includegraphics[width=\columnwidth]{images/16}\newline
-\end{center} 
-\item En el Explorador de pruebas, elija Ejecutar todo.
-\begin{center}
-\includegraphics[width=\columnwidth]{images/17}\newline
-\end{center} 
-\end{itemize}
-
-\section { Refactorizar el codigo en pruebas } 
-
-\begin{itemize}
-
-\item Cambie la línea que calcula result en el método SquareRoot de la manera siguiente:
+\item También puede definir escenarios en un solo método utilizando delegados para cada uno de los pasos y
+permitiendo que se definan múltiples escenarios dentro de la misma clase
 \begin{center}
 \includegraphics[width=\columnwidth]{images/004}\newline
-\end{center} 
-\item Elija Ejecutar todo y compruebe que todas las pruebas se siguen superando.
+\end{center}
+\item La sintaxis basada en métodos también admite pruebas basadas en datos, utilizando xUnit InlineData (los
+escenarios basados en clases aún no admiten pruebas basadas en datos).
 \begin{center}
 \includegraphics[width=\columnwidth]{images/005}\newline
 \end{center}
-
+\item Puede generar especificaciones de Gherkin de sus pruebas utilizando la biblioteca de
+extensiones CoreBDD.SpecGeneration , ya sea llamando desde una aplicación o herramienta de línea de
+comandos y pasando la ruta al ensamblado que contiene las pruebas, o conectando su proyecto de
+prueba para generar las especificaciones después de prueba de funcionamiento.
+Para hacer esto último, primero haga referencia a la biblioteca CoreBDD.SpecGeneration
+\begin{center}
+\includegraphics[width=\columnwidth]{images/5}\newline
+\end{center}
+\item A continuación, cree una clase de Fixture dentro de su proyecto de prueba y llame
+a GenerateSpecs.OutputFeatureSpecs dentro del método Dispose, pasando el ensamblado (o ruta al
+ensamblado) y la carpeta de salida para las especificaciones generadas.
+\begin{center}
+\includegraphics[width=\columnwidth]{images/006}\newline
+\end{center}
+\item Cuando las pruebas terminan de ejecutarse, se genera un archivo FeatureName.feature en la carpeta
+Especificaciones del proyecto de prueba xUnit. Genera especificaciones de Gherkin para la característica y
+los escenarios relacionados. Ejemplo CalculatorFeature.feature :
+\begin{center}
+\includegraphics[width=\columnwidth]{images/007}\newline
+\end{center}
 \end{itemize}
-\section{Parte 2: Creación de una prueba unitaria utilizando un framework de pruebas (XUnit) } 
-
+\section{Herramienta de línea de comando} 
 \begin{itemize}
-
-\item Ejecutamos los siguientes comandos:
+\item La herramienta de línea de comandos facilita la ejecución de tareas como la ejecución de pruebas con la
+salida de estilo Gherkin, la generación de archivos de prueba de características y escenarios
+predeterminados y la generación de archivos de funciones de Gherkin a partir de pruebas existentes o la
+generación de pruebas a partir de archivos de funciones existentes.
+\item Comenzando desde cero usando la plantilla dotnet y las herramientas cli:
+ mkdir demobdd
+ cd demobdd
+\item Luego cree el nuevo proyecto CoreBDD
+ dotnet new corebdd
+\item Encuentra pruebas de CoreBDD en directorios actuales y secundarios y ejecuta pruebas
 \begin{center}
-\includegraphics[width=\columnwidth]{images/lab2}\newline
-\end{center} 
-
+\includegraphics[width=\columnwidth]{images/6}\newline
+\end{center}
+\item Ejecute pruebas y luego genere archivos .feature de Gherkin en una ubicación específica
+ corebdd test --specs --output ./Specs
+\begin{center}
+\includegraphics[width=\columnwidth]{images/7}\newline
+\end{center}
+\item Andamio de una clase de entidad CoreBDD llamada 'Iniciar sesión' en la carpeta actual
+ corebdd generate feature --name login --namespace demobdd
+\item Andamio de una clase de escenario CoreBDD llamada 'LoginToWebsite' en la función 'Iniciar sesión'
+corebdd generate scenario --name LoginToWebsite --feature login --namespace demobdd
+\begin{center}
+\includegraphics[width=\columnwidth]{images/8}\newline
+\end{center}
+\item Scaffold CoreBDD Pruebas de archivos existentes '.feature' de pepinillo, especificando la ubicación de los
+archivos de características y la carpeta de destino para las pruebas generadas.
+\item Si ha seguido utilizando el ejemplo de prueba 'corebdd', elimine la carpeta 'Características' (dejando la
+carpeta Especificaciones con archivos .feature intactos) y luego ejecute:
+corebdd generate tests --path ./Specs --output ./Features --namespace demobdd
+\begin{center}
+\includegraphics[width=\columnwidth]{images/9}\newline
+\end{center}
+\item Ahora debería tener los apéndices de prueba regenerados utilizando los escenarios de archivo .feature.
+\begin{center}
+\includegraphics[width=\columnwidth]{images/10}\newline
+\end{center}
 \end{itemize}
-\section{Crea una prueba } 
-\begin{itemize}
-
-\item Actualice el proyecto PrimeService.Tests :
-
-\begin{center}
-\includegraphics[width=\columnwidth]{images/lab3}\newline
-\end{center} 
-\item Ejecuta el corredor de prueba.La prueba falla porque IsPrimeno se ha implementado. Usando el enfoque TDD, escriba
-solo el código suficiente para que esta prueba pase. Actualice IsPrimecon el siguiente
-código:
-\begin{center}
-\includegraphics[width=\columnwidth]{images/lab4}\newline
-\end{center} 
-\item Ejecutar dotnet test. La prueba pasa.
-\begin{center}
-\includegraphics[width=\columnwidth]{images/resultado2}\newline
-\end{center} 
-\item Reemplace el siguiente código:
-\begin{center}
-\includegraphics[width=\columnwidth]{images/lab5}\newline
-\end{center} 
-\item En el código anterior, [Theory]y [InlineData]habilite probar varios valores menores que
-dos. Dos es el número primo más pequeño.Ejecutar dotnet test, dos de las pruebas fallan:
-\begin{center}
-\includegraphics[width=\columnwidth]{images/resu3}\newline
-\end{center} 
-\item Para pasar todas las pruebas, actualice el IsPrimemétodo con el siguiente código:
-\begin{center}
-\includegraphics[width=\columnwidth]{images/lab6}\newline
-\end{center} 
-\item  actualice el código de destino.El IsPrime método completado no es un algoritmo eficiente para probar la primalidad.
-\begin{center}
-\includegraphics[width=\columnwidth]{images/final}\newline
-\end{center} 
-\end{itemize}
-
-
